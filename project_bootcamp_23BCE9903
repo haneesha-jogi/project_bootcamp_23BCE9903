@@ -1,0 +1,65 @@
+import pandas as pd
+
+
+# Creating a car prices dataset
+data = {
+    'Brand': ['Toyota', 'Honda', 'Ford', 'BMW', 'Tesla'],
+    'Model': ['Corolla', 'Civic', 'F-150', 'X5', 'Model S'],
+    'Price': [20000, 22000, 35000, 60000, 80000],
+    'Year': [2018, 2019, 2020, 2019, 2021],
+    'Mileage': [30000, 25000, 15000, 20000, 10000]
+}
+
+# Creating a DataFrame
+car_prices_df = pd.DataFrame(data)
+
+# Displaying the DataFrame
+print(car_prices_df)
+# Display summary statistics
+print(car_prices_df.describe())
+
+# Access specific columns
+print(car_prices_df['Brand'])
+
+# Filtering data
+filtered_cars = car_prices_df[car_prices_df['Price'] > 30000]  # Filtering cars with price > $30,000
+print(filtered_cars)
+
+# Grouping data
+average_price_by_brand = car_prices_df.groupby('Brand')['Price'].mean()  # Average price by brand
+print(average_price_by_brand)
+
+# Sorting data
+sorted_cars = car_prices_df.sort_values(by='Year')  # Sorting by year
+print(sorted_cars)
+import matplotlib.pyplot as plt
+# Line plot for Price over Years
+plt.plot(car_prices_df['Year'], car_prices_df['Price'], marker='o')
+plt.title('Car Prices Over Years')
+plt.xlabel('Year')
+plt.ylabel('Price')
+plt.grid(True)
+plt.show()
+# Bar plot for Average Prices by Brand
+
+average_price_by_brand = car_prices_df.groupby('Brand')['Price'].mean().sort_values()
+
+plt.barh(average_price_by_brand.index, average_price_by_brand.values,color='red')
+plt.title('Average Car Prices by Brand')
+plt.xlabel('Average Price')
+plt.ylabel('Brand')
+plt.show()
+# Scatter plot for Price vs Mileage
+
+plt.scatter(car_prices_df['Mileage'], car_prices_df['Price'],color='orange')
+plt.title('Car Price vs Mileage')
+plt.xlabel('Mileage')
+plt.ylabel('Price')
+plt.show()
+
+# Histogram for Car Prices Distribution
+plt.hist(car_prices_df['Price'], bins=5, edgecolor='black')
+plt.title('Distribution of Car Prices')
+plt.xlabel('Price')
+plt.ylabel('Frequency')
+plt.show()
